@@ -21,17 +21,23 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 
 ---
 
-## ☁️ CRUD Tipos de Clima
-**Entidade:** Categorias para classificar a condição observada.
+## ☁️ CRUD Estado do Tempo
+**Entidade:** Representa o estado do tempo observado em um determinado momento.
 
 **Campos:**
 - `id`
-- `descricao` (Ex: `"Ensolarado"`, `"Nublado"`, `"Chuva Forte"`)
-- `icone` (URL ou código do ícone)
+- `condicaoGeral` (Ex: `"Ensolarado"`, `"Nublado"`, `"Chuva Forte"`)
+- `temperatura` (número)
+- `umidade` (número)
+- `precipitacaoMM` (número)
+- `velocidadeVento` (número)
+- `iconeURL` (URL do ícone)
 
 **Relacionamento:**
-- **1:N** com **Registros Climáticos**  
-  *(Um Tipo é referenciado em Muitos Registros).*
+- Pode ser utilizada em **Registros Climáticos**, caso seja necessário registrar medições ao longo do tempo.  
+  *(Um Estado do Tempo pode ser referenciado em Muitos Registros).*
+
+
 
 ---
 
@@ -69,9 +75,9 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 
 ## 📌 Requisitos Adicionais (Estrutura e DAO)
 - **DAOs:**  
-  - `EstacaoDAO`  
-  - `TipoClimaDAO`  
-  - `RegistroDAO`  
+  - `EstacoesDeMedicaoDAO`  
+  - `EstadoDoTempoDAO`  
+  - `RegistroClimaticoDAO`  
 
 Cada DAO encapsula as operações **CRUD** para sua respectiva entidade, isolando a lógica de persistência (**LocalStorage ou MongoDB**) do restante da aplicação React.
 
