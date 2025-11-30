@@ -1,4 +1,6 @@
 export default class EstadoDoTempo {
+    id = null; // <-- ID simples e público
+  
     #condicaoGeral;
     #temperatura;
     #umidade;
@@ -6,7 +8,14 @@ export default class EstadoDoTempo {
     #velocidadeVento;
     #iconeURL;
   
-    constructor(condicaoGeral = "", temperatura = 0, umidade = 0, precipitacaoMM = 0, velocidadeVento = 0, iconeURL = "") {
+    constructor(
+      condicaoGeral = "",
+      temperatura = 0,
+      umidade = 0,
+      precipitacaoMM = 0,
+      velocidadeVento = 0,
+      iconeURL = ""
+    ) {
       this.setCondicaoGeral(condicaoGeral);
       this.setTemperatura(temperatura);
       this.setUmidade(umidade);
@@ -14,6 +23,20 @@ export default class EstadoDoTempo {
       this.setVelocidadeVento(velocidadeVento);
       this.setIconeURL(iconeURL);
     }
+  
+    // ====== ID ======
+    setId(id) {
+      if (typeof id === "string" && id.length > 0) {
+        this.id = id;
+        return true;
+      }
+      return false;
+    }
+  
+    getId() {
+      return this.id;
+    }
+    // =================
   
     setCondicaoGeral(condicao) {
       if (typeof condicao === "string" && condicao.length > 0) {
@@ -89,6 +112,7 @@ export default class EstadoDoTempo {
   
     toJSON() {
       return {
+        id: this.id,
         condicaoGeral: this.#condicaoGeral,
         temperatura: this.#temperatura,
         umidade: this.#umidade,
