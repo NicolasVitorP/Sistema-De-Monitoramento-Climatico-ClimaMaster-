@@ -76,7 +76,7 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 
 ## 📌 Requisitos Adicionais (Estrutura e DAO)
 - **DAOs:**  
-  - `EstacoesDeMedicaoDAO`  
+  - `EstacaoMedicaoDAO`  
   - `EstadoDoTempoDAO`  
   - `RegistroClimaticoDAO`  
 
