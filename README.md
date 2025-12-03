@@ -47,7 +47,7 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 **Campos:**
 - `id`
 - `estacaoId` *(Chave Estrangeira → Estações de Medição)*
-- `tipoClimaId` *(Chave Estrangeira → Tipos de Clima)*
+- `estadoTempoId` *(Chave Estrangeira → Estado do Tempo)*
 - `dataHora` *(Timestamp da medição)*
 - `temperatura (°C)`
 - `umidade (%)`
@@ -57,6 +57,7 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 - Possui **duas chaves estrangeiras**, estabelecendo a ligação necessária para o sistema e o relatório.
 
 ---
+
 
 ## 📊 Relatório Combinado
 **Relatório:** Médias Climáticas por Estação  
