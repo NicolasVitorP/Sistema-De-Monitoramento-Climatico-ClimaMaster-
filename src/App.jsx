@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import { CloudOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { CloudOutlined, EnvironmentOutlined, TableOutlined } from '@ant-design/icons';
 import EstadoDoTempoLista from './pages/EstadoDoTempoLista';
 import EstadoDoTempoForm from './pages/EstadoDoTempoForm';
 import EstacaoLista from './pages/EstacaoLista';
 import EstacaoForm from './pages/EstacaoForm';
+import RegistroLista from './pages/RegistroLista';
+import RegistroForm from './pages/RegistroForm';
 import './App.css';
 
 const { Header, Content, Footer } = Layout;
 
 const AppContent = () => {
   const location = useLocation();
-  const [current, setCurrent] = useState(location.pathname === '/' || location.pathname.startsWith('/editar') || location.pathname === '/novo' ? 'tempo' : 'estacoes');
+  const getSelectedKey = () => {
+    if (location.pathname.startsWith('/estacoes')) return 'estacoes';
+    if (location.pathname.startsWith('/registros')) return 'registros';
+    return 'tempo';
+  };
+
+  const [current, setCurrent] = useState(getSelectedKey());
 
   const items = [
     {
@@ -24,6 +32,11 @@ const AppContent = () => {
       label: <Link to="/estacoes">Estações de Medição</Link>,
       key: 'estacoes',
       icon: <EnvironmentOutlined />,
+    },
+    {
+      label: <Link to="/registros">Registros Climáticos</Link>,
+      key: 'registros',
+      icon: <TableOutlined />,
     },
   ];
 
@@ -40,7 +53,7 @@ const AppContent = () => {
         <Menu
           theme="light"
           mode="horizontal"
-          selectedKeys={[current]}
+          selectedKeys={[getSelectedKey()]}
           onClick={onClick}
           items={items}
           style={{ flex: 1, borderBottom: 'none', background: 'transparent' }}
@@ -56,6 +69,10 @@ const AppContent = () => {
             <Route path="/estacoes" element={<EstacaoLista />} />
             <Route path="/estacoes/nova" element={<EstacaoForm />} />
             <Route path="/estacoes/editar/:id" element={<EstacaoForm />} />
+
+            <Route path="/registros" element={<RegistroLista />} />
+            <Route path="/registros/novo" element={<RegistroForm />} />
+            <Route path="/registros/editar/:id" element={<RegistroForm />} />
           </Routes>
         </div>
       </Content>
