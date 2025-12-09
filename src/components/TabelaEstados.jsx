@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, Button, Space, Modal, message } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import IconPreviewModal from './IconPreviewModal';
 
 const TabelaEstados = ({ data, onEdit, onDelete }) => {
+    const [previewUrl, setPreviewUrl] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const handlePreview = (url) => {
+        setPreviewUrl(url);
+        setModalOpen(true);
+    };
 
     const handleDelete = (id) => {
         Modal.confirm({
@@ -49,6 +57,12 @@ const TabelaEstados = ({ data, onEdit, onDelete }) => {
             render: (_, record) => (
                 <Space size="middle">
                     <Button
+                        icon={<EyeOutlined />}
+                        onClick={() => handlePreview(record.iconeURL)}
+                    >
+                        Ver Ícone
+                    </Button>
+                    <Button
                         icon={<EditOutlined />}
                         onClick={() => onEdit(record.id)}
                     >
@@ -66,7 +80,16 @@ const TabelaEstados = ({ data, onEdit, onDelete }) => {
         },
     ];
 
-    return <Table columns={columns} dataSource={data} rowKey="id" />;
+    return (
+        <>
+            <Table columns={columns} dataSource={data} rowKey="id" />
+            <IconPreviewModal
+                url={previewUrl}
+                open={modalOpen}
+                onClose={() => setModalOpen(false)}
+            />
+        </>
+    );
 };
 
 export default TabelaEstados;
