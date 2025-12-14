@@ -4,11 +4,14 @@ import { PlusOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import EstacaoMedicaoDAO from '../daos/EstacaoMedicaoDAO.mjs';
 import TabelaEstacoes from '../components/TabelaEstacoes';
+import ModalMapaEstacao from '../components/ModalMapaEstacao';
 
 const { Title } = Typography;
 
 const EstacaoLista = () => {
     const [data, setData] = useState([]);
+    const [modalMapaVisivel, setModalMapaVisivel] = useState(false);
+    const [estacaoSelecionada, setEstacaoSelecionada] = useState(null);
     const navigate = useNavigate();
     const dao = new EstacaoMedicaoDAO();
 
@@ -25,6 +28,16 @@ const EstacaoLista = () => {
         dao.excluir(id);
         message.success('Estação excluída com sucesso!');
         carregarDados();
+    };
+
+    const handleVerMapa = (estacao) => {
+        setEstacaoSelecionada(estacao);
+        setModalMapaVisivel(true);
+    };
+
+    const handleFecharMapa = () => {
+        setModalMapaVisivel(false);
+        setEstacaoSelecionada(null);
     };
 
     return (
@@ -49,6 +62,16 @@ const EstacaoLista = () => {
                 data={data}
                 onEdit={(id) => navigate(`/estacoes/editar/${id}`)}
                 onDelete={handleDelete}
+                onVerMapa={handleVerMapa}
+            />
+            <ModalMapaEstacao
+                visible={modalMapaVisivel}
+                onClose={handleFecharMapa}
+                estacao={estacaoSelecionada}
+                onEdit={(id) => {
+                    handleFecharMapa();
+                    navigate(`/estacoes/editar/${id}`);
+                }}
             />
         </div>
     );

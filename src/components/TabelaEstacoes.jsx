@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table, Button, Space, Modal } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, EnvironmentOutlined } from '@ant-design/icons';
 
-const TabelaEstacoes = ({ data, onEdit, onDelete }) => {
+const TabelaEstacoes = ({ data, onEdit, onDelete, onVerMapa }) => {
 
     const handleDelete = (id) => {
         Modal.confirm({
@@ -48,6 +48,11 @@ const TabelaEstacoes = ({ data, onEdit, onDelete }) => {
             key: 'actions',
             render: (_, record) => (
                 <Space size="middle">
+                    <Button
+                        icon={<EnvironmentOutlined />}
+                        onClick={() => onVerMapa(record)}
+                        title="Ver no Mapa"
+                    />
                     <Button
                         icon={<EditOutlined />}
                         onClick={() => onEdit(record.id)}
