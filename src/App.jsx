@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import { CloudOutlined, EnvironmentOutlined, TableOutlined } from '@ant-design/icons';
+import { CloudOutlined, EnvironmentOutlined, TableOutlined, DashboardOutlined } from '@ant-design/icons';
 import EstadoDoTempoLista from './pages/EstadoDoTempoLista';
 import EstadoDoTempoForm from './pages/EstadoDoTempoForm';
 import EstacaoLista from './pages/EstacaoLista';
 import EstacaoForm from './pages/EstacaoForm';
 import RegistroLista from './pages/RegistroLista';
 import RegistroForm from './pages/RegistroForm';
+import RelatorioCombinado from './pages/RelatorioCombinado';
 import './App.css';
 
 const { Header, Content, Footer } = Layout;
@@ -16,7 +17,9 @@ const AppContent = () => {
   const location = useLocation();
   const getSelectedKey = () => {
     if (location.pathname.startsWith('/estacoes')) return 'estacoes';
+    if (location.pathname.startsWith('/estacoes')) return 'estacoes';
     if (location.pathname.startsWith('/registros')) return 'registros';
+    if (location.pathname.startsWith('/relatorio')) return 'relatorio';
     return 'tempo';
   };
 
@@ -37,6 +40,11 @@ const AppContent = () => {
       label: <Link to="/registros">Registros Climáticos</Link>,
       key: 'registros',
       icon: <TableOutlined />,
+    },
+    {
+      label: <Link to="/relatorio">Relatório Combinado</Link>,
+      key: 'relatorio',
+      icon: <DashboardOutlined />,
     },
   ];
 
@@ -73,6 +81,8 @@ const AppContent = () => {
             <Route path="/registros" element={<RegistroLista />} />
             <Route path="/registros/novo" element={<RegistroForm />} />
             <Route path="/registros/editar/:id" element={<RegistroForm />} />
+
+            <Route path="/relatorio" element={<RelatorioCombinado />} />
           </Routes>
         </div>
       </Content>
