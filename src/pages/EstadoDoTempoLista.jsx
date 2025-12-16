@@ -28,14 +28,23 @@ const EstadoDoTempoLista = () => {
     };
 
     return (
-        <div style={{ padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <Title level={2}>Estados do Tempo</Title>
+        <div className="glass-panel" style={{ padding: '24px' }}>
+            <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '24px',
+                gap: '16px'
+            }}>
+                <Title level={2} style={{ margin: 0, color: '#1976D2' }}>Estados do Tempo</Title>
                 <Button
                     type="primary"
                     icon={<PlusOutlined />}
                     onClick={() => navigate('/novo')}
                     size="large"
+                    shape="round"
+                    style={{ background: '#1976D2' }}
                 >
                     Novo Estado
                 </Button>

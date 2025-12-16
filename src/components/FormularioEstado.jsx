@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, Input, InputNumber, Button, Card } from 'antd';
+import { Form, Input, InputNumber, Button, Card, Row, Col } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 
 const FormularioEstado = ({ onFinish, initialValues, title }) => {
@@ -14,22 +14,22 @@ const FormularioEstado = ({ onFinish, initialValues, title }) => {
     }, [initialValues, form]);
 
     return (
-        <Card title={title}>
-            <Form
-                form={form}
-                layout="vertical"
-                onFinish={onFinish}
-                autoComplete="off"
+        <Form
+            form={form}
+            layout="vertical"
+            onFinish={onFinish}
+            autoComplete="off"
+        >
+            <Form.Item
+                label="Condição Geral"
+                name="condicaoGeral"
+                rules={[{ required: true, message: 'Por favor, insira a condição geral!' }]}
             >
-                <Form.Item
-                    label="Condição Geral"
-                    name="condicaoGeral"
-                    rules={[{ required: true, message: 'Por favor, insira a condição geral!' }]}
-                >
-                    <Input placeholder="Ex: Ensolarado, Nublado" />
-                </Form.Item>
+                <Input placeholder="Ex: Ensolarado, Nublado" />
+            </Form.Item>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <Row gutter={16}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         label="Temperatura (°C)"
                         name="temperatura"
@@ -37,7 +37,8 @@ const FormularioEstado = ({ onFinish, initialValues, title }) => {
                     >
                         <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
-
+                </Col>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         label="Umidade (%)"
                         name="umidade"
@@ -45,9 +46,11 @@ const FormularioEstado = ({ onFinish, initialValues, title }) => {
                     >
                         <InputNumber style={{ width: '100%' }} min={0} max={100} />
                     </Form.Item>
-                </div>
+                </Col>
+            </Row>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <Row gutter={16}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         label="Precipitação (mm)"
                         name="precipitacaoMM"
@@ -55,7 +58,8 @@ const FormularioEstado = ({ onFinish, initialValues, title }) => {
                     >
                         <InputNumber style={{ width: '100%' }} min={0} />
                     </Form.Item>
-
+                </Col>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         label="Velocidade do Vento (km/h)"
                         name="velocidadeVento"
@@ -63,23 +67,23 @@ const FormularioEstado = ({ onFinish, initialValues, title }) => {
                     >
                         <InputNumber style={{ width: '100%' }} min={0} />
                     </Form.Item>
-                </div>
+                </Col>
+            </Row>
 
-                <Form.Item
-                    label="URL do Ícone"
-                    name="iconeURL"
-                    rules={[{ required: true, message: 'Insira a URL do ícone!' }]}
-                >
-                    <Input placeholder="http://exemplo.com/icone.png" />
-                </Form.Item>
+            <Form.Item
+                label="URL do Ícone"
+                name="iconeURL"
+                rules={[{ required: true, message: 'Insira a URL do ícone!' }]}
+            >
+                <Input placeholder="http://exemplo.com/icone.png" />
+            </Form.Item>
 
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" icon={<SaveOutlined />} size="large" block>
-                        Salvar
-                    </Button>
-                </Form.Item>
-            </Form>
-        </Card>
+            <Form.Item>
+                <Button type="primary" htmlType="submit" icon={<SaveOutlined />} size="large" block shape="round">
+                    Salvar
+                </Button>
+            </Form.Item>
+        </Form>
     );
 };
 

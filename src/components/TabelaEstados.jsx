@@ -81,14 +81,20 @@ const TabelaEstados = ({ data, onEdit, onDelete }) => {
     ];
 
     return (
-        <>
-            <Table columns={columns} dataSource={data} rowKey="id" />
+        <div style={{ overflowX: 'auto' }}>
+            <Table
+                columns={columns}
+                dataSource={data}
+                rowKey="id"
+                scroll={{ x: 800 }}
+                pagination={{ position: ['bottomCenter'], responsive: true }}
+            />
             <IconPreviewModal
                 url={previewUrl}
                 open={modalOpen}
                 onClose={() => setModalOpen(false)}
             />
-        </>
+        </div>
     );
 };
 

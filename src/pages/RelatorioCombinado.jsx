@@ -78,34 +78,50 @@ const RelatorioCombinado = () => {
     ];
 
     return (
-        <div style={{ padding: 24, background: '#fff', minHeight: 360, borderRadius: 8 }}>
-            <Title level={2}><DashboardOutlined /> Relatório de Médias Climáticas</Title>
-            <p>Análise de temperatura e umidade média agrupada por estação de medição.</p>
+        <div className="glass-panel" style={{ padding: '24px' }}>
+            <div style={{ marginBottom: '24px' }}>
+                <Title level={2} style={{ margin: 0, color: '#1976D2' }}>
+                    <DashboardOutlined /> Relatório de Médias
+                </Title>
+                <p style={{ color: 'var(--text-secondary)' }}>Análise de temperatura e umidade média agrupada por estação.</p>
+            </div>
 
-            <Card style={{ marginBottom: 20 }}>
-                <Space>
-                    <span>Filtrar por Período:</span>
+            <Card style={{ marginBottom: 24, borderRadius: '12px', border: 'none', background: 'rgba(255,255,255,0.5)' }}>
+                <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '16px',
+                    alignItems: 'center'
+                }}>
+                    <span style={{ fontWeight: 500 }}>Filtrar por Período:</span>
                     <RangePicker
                         showTime
                         onChange={(dates) => setDatas(dates)}
+                        style={{ flex: 1, minWidth: '280px' }}
                     />
                     <Button
+                        type="primary"
                         icon={<ReloadOutlined />}
                         onClick={carregarDados}
+                        shape="round"
                     >
                         Atualizar
                     </Button>
-                </Space>
+                </div>
             </Card>
 
-            <Table
-                columns={columns}
-                dataSource={dados}
-                rowKey="id"
-                loading={loading}
-                pagination={{ pageSize: 10 }}
-                bordered
-            />
+            <div style={{ overflowX: 'auto' }}>
+                <Table
+                    columns={columns}
+                    dataSource={dados}
+                    rowKey="id"
+                    loading={loading}
+                    pagination={{ pageSize: 10, responsive: true }}
+                    scroll={{ x: 800 }}
+                    bordered
+                    style={{ background: 'transparent' }}
+                />
+            </div>
         </div>
     );
 };

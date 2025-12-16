@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, InputNumber, Button, Card, Select, DatePicker } from 'antd';
+import { Form, InputNumber, Button, Card, Select, DatePicker, Row, Col } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 
@@ -20,14 +20,14 @@ const FormularioRegistro = ({ onFinish, initialValues, title, estacoes, estados 
     }, [initialValues, form]);
 
     return (
-        <Card title={title}>
-            <Form
-                form={form}
-                layout="vertical"
-                onFinish={onFinish}
-                autoComplete="off"
-            >
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        <Form
+            form={form}
+            layout="vertical"
+            onFinish={onFinish}
+            autoComplete="off"
+        >
+            <Row gutter={16}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         label="Estação de Medição"
                         name="estacaoId"
@@ -39,7 +39,8 @@ const FormularioRegistro = ({ onFinish, initialValues, title, estacoes, estados 
                             ))}
                         </Select>
                     </Form.Item>
-
+                </Col>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         label="Condição do Tempo"
                         name="estadoTempoId"
@@ -51,17 +52,19 @@ const FormularioRegistro = ({ onFinish, initialValues, title, estacoes, estados 
                             ))}
                         </Select>
                     </Form.Item>
-                </div>
+                </Col>
+            </Row>
 
-                <Form.Item
-                    label="Data e Hora"
-                    name="dataHora"
-                    rules={[{ required: true, message: 'Selecione a data e hora!' }]}
-                >
-                    <DatePicker showTime style={{ width: '100%' }} format="DD/MM/YYYY HH:mm" />
-                </Form.Item>
+            <Form.Item
+                label="Data e Hora"
+                name="dataHora"
+                rules={[{ required: true, message: 'Selecione a data e hora!' }]}
+            >
+                <DatePicker showTime style={{ width: '100%' }} format="DD/MM/YYYY HH:mm" />
+            </Form.Item>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+            <Row gutter={16}>
+                <Col xs={24} sm={8}>
                     <Form.Item
                         label="Temperatura (°C)"
                         name="temperatura"
@@ -69,7 +72,8 @@ const FormularioRegistro = ({ onFinish, initialValues, title, estacoes, estados 
                     >
                         <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
-
+                </Col>
+                <Col xs={24} sm={8}>
                     <Form.Item
                         label="Umidade (%)"
                         name="umidade"
@@ -77,7 +81,8 @@ const FormularioRegistro = ({ onFinish, initialValues, title, estacoes, estados 
                     >
                         <InputNumber style={{ width: '100%' }} min={0} max={100} />
                     </Form.Item>
-
+                </Col>
+                <Col xs={24} sm={8}>
                     <Form.Item
                         label="Pressão (hPa)"
                         name="pressaoAtmosferica"
@@ -85,15 +90,15 @@ const FormularioRegistro = ({ onFinish, initialValues, title, estacoes, estados 
                     >
                         <InputNumber style={{ width: '100%' }} min={0} />
                     </Form.Item>
-                </div>
+                </Col>
+            </Row>
 
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" icon={<SaveOutlined />} size="large" block>
-                        Salvar
-                    </Button>
-                </Form.Item>
-            </Form>
-        </Card>
+            <Form.Item>
+                <Button type="primary" htmlType="submit" icon={<SaveOutlined />} size="large" block>
+                    Salvar
+                </Button>
+            </Form.Item>
+        </Form>
     );
 };
 

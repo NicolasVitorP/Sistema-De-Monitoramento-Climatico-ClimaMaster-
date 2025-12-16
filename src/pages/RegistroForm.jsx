@@ -71,21 +71,20 @@ const RegistroForm = () => {
     };
 
     return (
-        <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '16px' }}>
+        <div className="glass-panel" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Title level={3} style={{ margin: 0, color: '#1976D2' }}>
+                    {id ? 'Editar Registro' : 'Novo Registro'}
+                </Title>
                 <Button icon={<ArrowLeftOutlined />} onClick={() => navigate('/registros')}>
                     Voltar
                 </Button>
             </div>
 
-            <div style={{ marginBottom: '16px' }}>
-                <Title level={3}>{id ? 'Editar Registro' : 'Novo Registro'}</Title>
-            </div>
-
             <FormularioRegistro
                 onFinish={onFinish}
                 initialValues={initialValues}
-                title={id ? 'Editar Dados do Registro' : 'Inserir Dados do Registro'}
+                title={null}
                 estacoes={estacoes}
                 estados={estados}
             />

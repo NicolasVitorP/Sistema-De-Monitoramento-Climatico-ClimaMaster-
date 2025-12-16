@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
-import { CloudOutlined, EnvironmentOutlined, TableOutlined, DashboardOutlined } from '@ant-design/icons';
+import { Layout, Menu, Drawer, Button, theme } from 'antd';
+import {
+  CloudOutlined,
+  EnvironmentOutlined,
+  TableOutlined,
+  DashboardOutlined,
+  MenuOutlined
+} from '@ant-design/icons';
 import EstadoDoTempoLista from './pages/EstadoDoTempoLista';
 import EstadoDoTempoForm from './pages/EstadoDoTempoForm';
 import EstacaoLista from './pages/EstacaoLista';
@@ -11,21 +17,29 @@ import RegistroForm from './pages/RegistroForm';
 import RelatorioCombinado from './pages/RelatorioCombinado';
 import './App.css';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
 const AppContent = () => {
   const location = useLocation();
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Responsive check
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const getSelectedKey = () => {
-    if (location.pathname.startsWith('/estacoes')) return 'estacoes';
-    if (location.pathname.startsWith('/estacoes')) return 'estacoes';
-    if (location.pathname.startsWith('/registros')) return 'registros';
-    if (location.pathname.startsWith('/relatorio')) return 'relatorio';
+    const path = location.pathname;
+    if (path.startsWith('/estacoes')) return 'estacoes';
+    if (path.startsWith('/registros')) return 'registros';
+    if (path.startsWith('/relatorio')) return 'relatorio';
     return 'tempo';
   };
 
-  const [current, setCurrent] = useState(getSelectedKey());
-
-  const items = [
+  const menuItems = [
     {
       label: <Link to="/">Estados do Tempo</Link>,
       key: 'tempo',
@@ -48,47 +62,96 @@ const AppContent = () => {
     },
   ];
 
-  const onClick = (e) => {
-    setCurrent(e.key);
+  const handleMenuClick = () => {
+    if (isMobile) setMobileDrawerOpen(false);
   };
 
   return (
-    <Layout className="layout" style={{ minHeight: '100vh', background: 'transparent' }}>
-      <Header style={{ display: 'flex', alignItems: 'center', background: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(10px)', padding: '0 24px', borderRadius: '8px 8px 0 0' }}>
-        <div className="logo" style={{ marginRight: '24px', fontWeight: 'bold', fontSize: '18px', color: '#1890ff' }}>
-          ClimaMaster
-        </div>
+    <Layout className="app-layout">
+      {/* Mobile Drawer Navigation */}
+      <Drawer
+        title={<div style={{ textAlign: 'center', width: '100%' }}>ClimaMaster</div>}
+        placement="left"
+        onClose={() => setMobileDrawerOpen(false)}
+        open={mobileDrawerOpen}
+        styles={{ body: { padding: 0 } }}
+      >
         <Menu
-          theme="light"
-          mode="horizontal"
+          mode="inline"
           selectedKeys={[getSelectedKey()]}
-          onClick={onClick}
-          items={items}
-          style={{ flex: 1, borderBottom: 'none', background: 'transparent' }}
+          items={menuItems}
+          onClick={handleMenuClick}
         />
-      </Header>
-      <Content style={{ padding: '24px' }}>
-        <div className="site-layout-content">
-          <Routes>
-            <Route path="/" element={<EstadoDoTempoLista />} />
-            <Route path="/novo" element={<EstadoDoTempoForm />} />
-            <Route path="/editar/:id" element={<EstadoDoTempoForm />} />
+      </Drawer>
 
-            <Route path="/estacoes" element={<EstacaoLista />} />
-            <Route path="/estacoes/nova" element={<EstacaoForm />} />
-            <Route path="/estacoes/editar/:id" element={<EstacaoForm />} />
+      {/* Desktop Sidebar */}
+      {!isMobile && (
+        <Sider width={250} theme="light" className="glass-panel" style={{
+          margin: '16px 0 16px 16px',
+          border: 'none',
+          borderRadius: '16px',
+          height: 'calc(100vh - 32px)',
+          position: 'fixed',
+          left: 0,
+          zIndex: 100
+        }}>
+          <div className="logo-container" style={{
+            margin: '16px 0',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '64px' // Fixed height for consistency
+          }}>
+            <h2 style={{ margin: 0, color: '#1976D2' }}>ClimaMaster</h2>
+          </div>
+          <Menu
+            mode="inline"
+            selectedKeys={[getSelectedKey()]}
+            items={menuItems}
+            style={{ borderRight: 0 }}
+          />
+        </Sider>
+      )}
 
-            <Route path="/registros" element={<RegistroLista />} />
-            <Route path="/registros/novo" element={<RegistroForm />} />
-            <Route path="/registros/editar/:id" element={<RegistroForm />} />
+      {/* Main Content Layout */}
+      <Layout style={{ marginLeft: isMobile ? 0 : 280, transition: 'all 0.2s' }}>
+        <Header style={{ padding: 0, background: 'transparent', boxShadow: 'none', display: 'flex', alignItems: 'center' }}>
+          {isMobile && (
+            <Button
+              type="text"
+              icon={<MenuOutlined />}
+              onClick={() => setMobileDrawerOpen(true)}
+              style={{ fontSize: '18px', width: 64, height: 64 }}
+            />
+          )}
+          <div style={{ padding: '0 24px', fontSize: '20px', fontWeight: 600 }}>
+            {/* Dynamic Title based on selection could go here */}
+          </div>
+        </Header>
 
-            <Route path="/relatorio" element={<RelatorioCombinado />} />
-          </Routes>
-        </div>
-      </Content>
-      <Footer style={{ textAlign: 'center', background: 'transparent' }}>
-        ClimaMaster ©2025 Created with Ant Design
-      </Footer>
+        <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+          <div className="site-layout-content fade-in">
+            <Routes>
+              <Route path="/" element={<EstadoDoTempoLista />} />
+              <Route path="/novo" element={<EstadoDoTempoForm />} />
+              <Route path="/editar/:id" element={<EstadoDoTempoForm />} />
+
+              <Route path="/estacoes" element={<EstacaoLista />} />
+              <Route path="/estacoes/nova" element={<EstacaoForm />} />
+              <Route path="/estacoes/editar/:id" element={<EstacaoForm />} />
+
+              <Route path="/registros" element={<RegistroLista />} />
+              <Route path="/registros/novo" element={<RegistroForm />} />
+              <Route path="/registros/editar/:id" element={<RegistroForm />} />
+
+              <Route path="/relatorio" element={<RelatorioCombinado />} />
+            </Routes>
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center', background: 'transparent' }}>
+          ClimaMaster ©2025 Created with Ant Design
+        </Footer>
+      </Layout>
     </Layout>
   );
 };

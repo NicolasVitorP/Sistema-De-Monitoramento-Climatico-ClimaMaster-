@@ -59,21 +59,20 @@ const EstacaoForm = () => {
     };
 
     return (
-        <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '16px' }}>
+        <div className="glass-panel" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Title level={3} style={{ margin: 0, color: '#1976D2' }}>
+                    {id ? 'Editar Estação' : 'Nova Estação'}
+                </Title>
                 <Button icon={<ArrowLeftOutlined />} onClick={() => navigate('/estacoes')}>
                     Voltar
                 </Button>
             </div>
 
-            <div style={{ marginBottom: '16px' }}>
-                <Title level={3}>{id ? 'Editar Estação' : 'Nova Estação'}</Title>
-            </div>
-
             <FormularioEstacao
                 onFinish={onFinish}
                 initialValues={initialValues}
-                title={id ? 'Editar Dados da Estação' : 'Inserir Dados da Estação'}
+                title={null}
             />
         </div>
     );
