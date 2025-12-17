@@ -94,7 +94,7 @@ const FormularioRegistro = ({ onFinish, initialValues, title, estacoes, estados 
             </Row>
 
             <Form.Item>
-                <Button type="primary" htmlType="submit" icon={<SaveOutlined />} size="large" block>
+                <Button type="primary" htmlType="submit" icon={<SaveOutlined />} size="large" block shape="round">
                     Salvar
                 </Button>
             </Form.Item>
