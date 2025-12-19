@@ -37,8 +37,6 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 - Pode ser utilizada em **Registros Climáticos**, caso seja necessário registrar medições ao longo do tempo.  
   *(Um Estado do Tempo pode ser referenciado em Muitos Registros).*
 
-
-
 ---
 
 ## 🌡️ CRUD Registros Climáticos
@@ -57,7 +55,6 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 - Possui **duas chaves estrangeiras**, estabelecendo a ligação necessária para o sistema e o relatório.
 
 ---
-
 
 ## 📊 Relatório Combinado
 **Relatório:** Médias Climáticas por Estação  
@@ -80,24 +77,31 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
   - `EstadoDoTempoDAO`  
   - `RegistroClimaticoDAO`  
 
-Cada DAO encapsula as operações **CRUD** para sua respectiva entidade, isolando a lógica de persistência (**LocalStorage ou MongoDB**) do restante da aplicação React.
+Cada DAO encapsula as operações **CRUD** para sua respectiva entidade, isolando a lógica de persistência (**LocalStorage**) do restante da aplicação React.
 
 ---
 
 ## 🛠️ Tecnologias
-- **Frontend:** ReactJS  
-- **UI/UX:** Ant Design (AntD)  
-- **Banco de Dados:** LocalStorage ou MongoDB  
+- **Frontend:** ReactJS 19.2.3
+- **Linguagem:** JavaScript (ES6+)
+- **UI/UX:** Ant Design (AntD) 6.1.0
+- **Roteamento:** React Router DOM 7.10.1
+- **Mapas:** Leaflet 1.9.4 & React Leaflet 5.0.0
+- **Build Tool:** Vite 7.2.4
+- **Persistência:** LocalStorage
 - **Recursos Extras:**  
-  - Responsividade  
+  - Responsividade (mobile-first)
+  - Mapas interativos com marcadores
+  - Validação de formulários
   - Feedback visual (loaders, mensagens de sucesso/erro)
+  - Interface moderna e acessível
 
 ---
 
 ## 🚀 Objetivo do Projeto
 Construir um sistema modular e escalável para monitoramento climático, permitindo:
 - Cadastro e gerenciamento de estações meteorológicas
+- Visualização geográfica das estações em mapa interativo
 - Classificação de tipos de clima
 - Registro de medições em tempo real
-- Relatórios agregados para análise de tendências
-
+- Relatórios agregados para análise de tendências climáticas
