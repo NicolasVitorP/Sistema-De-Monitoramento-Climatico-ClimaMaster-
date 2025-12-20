@@ -4,6 +4,9 @@ Este projeto exemplifica a estrutura de um **Sistema de Monitoramento Climático
 
 ---
 
+🔗 **Documentação Técnica :** [Acesse a documentação técnica completa no GitHub](https://github.com/NicolasVitorP/Sistema-de-Monitoramento-Climatico)
+
+
 ## 📍 CRUD Estações de Medição
 **Entidade:** Locais fixos para coleta de dados.
 
