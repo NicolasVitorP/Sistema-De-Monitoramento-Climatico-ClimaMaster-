@@ -61,21 +61,27 @@ const EstadoDoTempoForm = () => {
     };
 
     return (
-        <div className="glass-panel" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Title level={3} style={{ margin: 0, color: '#1976D2' }}>
+        <div className="fade-in" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Title level={2} style={{ margin: 0, color: 'var(--text-primary)' }}>
                     {id ? 'Editar Estado do Tempo' : 'Novo Estado do Tempo'}
                 </Title>
-                <Button icon={<ArrowLeftOutlined />} onClick={() => navigate('/')}>
+                <Button 
+                    type="text" 
+                    icon={<ArrowLeftOutlined />} 
+                    onClick={() => navigate('/')}
+                    style={{ color: 'var(--text-secondary)' }}
+                >
                     Voltar
                 </Button>
             </div>
 
-            <FormularioEstado
-                onFinish={onFinish}
-                initialValues={initialValues}
-                title={null} // Removed title from card to use page title
-            />
+            <div style={{ background: '#fff', padding: '32px', borderRadius: '16px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-color)' }}>
+                <FormularioEstado
+                    onFinish={onFinish}
+                    initialValues={initialValues}
+                />
+            </div>
         </div>
     );
 };

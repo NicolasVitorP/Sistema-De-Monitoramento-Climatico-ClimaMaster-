@@ -59,21 +59,27 @@ const EstacaoForm = () => {
     };
 
     return (
-        <div className="glass-panel" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Title level={3} style={{ margin: 0, color: '#1976D2' }}>
+        <div className="fade-in" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Title level={2} style={{ margin: 0, color: 'var(--text-primary)' }}>
                     {id ? 'Editar Estação' : 'Nova Estação'}
                 </Title>
-                <Button icon={<ArrowLeftOutlined />} onClick={() => navigate('/estacoes')}>
+                <Button 
+                    type="text" 
+                    icon={<ArrowLeftOutlined />} 
+                    onClick={() => navigate('/estacoes')}
+                    style={{ color: 'var(--text-secondary)' }}
+                >
                     Voltar
                 </Button>
             </div>
 
-            <FormularioEstacao
-                onFinish={onFinish}
-                initialValues={initialValues}
-                title={null}
-            />
+            <div style={{ background: '#fff', padding: '32px', borderRadius: '16px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-color)' }}>
+                <FormularioEstacao
+                    onFinish={onFinish}
+                    initialValues={initialValues}
+                />
+            </div>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Button, Space, Modal, message } from 'antd';
+import { Table, Button, Space, Modal, Tooltip, Tag } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import IconPreviewModal from './IconPreviewModal';
 
@@ -14,11 +14,12 @@ const TabelaEstados = ({ data, onEdit, onDelete }) => {
 
     const handleDelete = (id) => {
         Modal.confirm({
-            title: 'Tem certeza que deseja excluir?',
+            title: 'Excluir Estado do Tempo?',
             content: 'Essa ação não pode ser desfeita.',
-            okText: 'Sim',
+            okText: 'Excluir',
             okType: 'danger',
-            cancelText: 'Não',
+            cancelText: 'Cancelar',
+            centered: true,
             onOk() {
                 onDelete(id);
             },
@@ -30,9 +31,10 @@ const TabelaEstados = ({ data, onEdit, onDelete }) => {
             title: 'Condição Geral',
             dataIndex: 'condicaoGeral',
             key: 'condicaoGeral',
+            render: (text) => <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{text}</span>
         },
         {
-            title: 'Temperatura (°C)',
+            title: 'Temp (°C)',
             dataIndex: 'temperatura',
             key: 'temperatura',
         },
@@ -54,40 +56,48 @@ const TabelaEstados = ({ data, onEdit, onDelete }) => {
         {
             title: 'Ações',
             key: 'actions',
+            align: 'right',
             render: (_, record) => (
-                <Space size="middle">
-                    <Button
-                        icon={<EyeOutlined />}
-                        onClick={() => handlePreview(record.iconeURL)}
-                    >
-                        Ver Ícone
-                    </Button>
-                    <Button
-                        icon={<EditOutlined />}
-                        onClick={() => onEdit(record.id)}
-                    >
-                        Editar
-                    </Button>
-                    <Button
-                        danger
-                        icon={<DeleteOutlined />}
-                        onClick={() => handleDelete(record.id)}
-                    >
-                        Excluir
-                    </Button>
+                <Space size="small">
+                    <Tooltip title="Ver ícone">
+                        <Button
+                            type="text"
+                            shape="circle"
+                            icon={<EyeOutlined style={{ color: 'var(--primary-color)' }} />}
+                            onClick={() => handlePreview(record.iconeURL)}
+                        />
+                    </Tooltip>
+                    <Tooltip title="Editar">
+                        <Button
+                            type="text"
+                            shape="circle"
+                            icon={<EditOutlined style={{ color: 'var(--text-secondary)' }} />}
+                            onClick={() => onEdit(record.id)}
+                        />
+                    </Tooltip>
+                    <Tooltip title="Excluir">
+                        <Button
+                            type="text"
+                            danger
+                            shape="circle"
+                            icon={<DeleteOutlined />}
+                            onClick={() => handleDelete(record.id)}
+                        />
+                    </Tooltip>
                 </Space>
             ),
         },
     ];
 
     return (
-        <div style={{ overflowX: 'auto' }}>
+        <div style={{ background: '#fff', borderRadius: '16px', boxShadow: 'var(--shadow-sm)', overflow: 'hidden' }}>
             <Table
                 columns={columns}
                 dataSource={data}
                 rowKey="id"
                 scroll={{ x: 800 }}
                 pagination={{ position: ['bottomCenter'], responsive: true }}
+                bordered={false}
             />
             <IconPreviewModal
                 url={previewUrl}

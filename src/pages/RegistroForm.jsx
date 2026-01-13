@@ -50,7 +50,7 @@ const RegistroForm = () => {
             const novoRegistro = new RegistroClimatico(
                 values.estacaoId,
                 values.estadoTempoId,
-                values.dataHora.toISOString(), // AntD DatePicker returns a DayJS object
+                values.dataHora.toISOString(), 
                 values.temperatura,
                 values.umidade,
                 values.pressaoAtmosferica
@@ -71,23 +71,29 @@ const RegistroForm = () => {
     };
 
     return (
-        <div className="glass-panel" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Title level={3} style={{ margin: 0, color: '#1976D2' }}>
+        <div className="fade-in" style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Title level={2} style={{ margin: 0, color: 'var(--text-primary)' }}>
                     {id ? 'Editar Registro' : 'Novo Registro'}
                 </Title>
-                <Button icon={<ArrowLeftOutlined />} onClick={() => navigate('/registros')}>
+                <Button 
+                    type="text" 
+                    icon={<ArrowLeftOutlined />} 
+                    onClick={() => navigate('/registros')}
+                    style={{ color: 'var(--text-secondary)' }}
+                >
                     Voltar
                 </Button>
             </div>
 
-            <FormularioRegistro
-                onFinish={onFinish}
-                initialValues={initialValues}
-                title={null}
-                estacoes={estacoes}
-                estados={estados}
-            />
+            <div style={{ background: '#fff', padding: '32px', borderRadius: '16px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-color)' }}>
+                <FormularioRegistro
+                    onFinish={onFinish}
+                    initialValues={initialValues}
+                    estacoes={estacoes}
+                    estados={estados}
+                />
+            </div>
         </div>
     );
 };
