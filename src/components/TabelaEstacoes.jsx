@@ -2,6 +2,15 @@ import React from 'react';
 import { Table, Button, Space, Modal, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined, EnvironmentOutlined } from '@ant-design/icons';
 
+/**
+ * Componente que exibe a tabela de Estações de Medição.
+ * 
+ * @param {Object} props
+ * @param {Array} props.data Lista de dados das estações
+ * @param {Function} props.onEdit Função para editar
+ * @param {Function} props.onDelete Função para deletar
+ * @param {Function} props.onVerMapa Função para ver no mapa
+ */
 const TabelaEstacoes = ({ data, onEdit, onDelete, onVerMapa }) => {
 
     const handleDelete = (id) => {

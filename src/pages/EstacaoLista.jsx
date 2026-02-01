@@ -9,6 +9,10 @@ import StatIcon from '../components/StatIcon';
 
 const { Title, Text } = Typography;
 
+/**
+ * Página de listagem de Estações de Medição.
+ * Permite visualizar, criar, editar e excluir estações.
+ */
 const EstacaoLista = () => {
     const [data, setData] = useState([]);
     const [modalMapaVisivel, setModalMapaVisivel] = useState(false);
@@ -16,6 +20,7 @@ const EstacaoLista = () => {
     const navigate = useNavigate();
     const dao = new EstacaoMedicaoDAO();
 
+    // Carrega dados do DAO
     const carregarDados = () => {
         const lista = dao.listar();
         setData(lista);
@@ -54,7 +59,7 @@ const EstacaoLista = () => {
                 </Button>
             </div>
 
-            {/* Header & Stats */}
+            {/* Cabeçalho e Estatísticas */}
             <div style={{ marginBottom: '32px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
                     <div>
@@ -73,7 +78,7 @@ const EstacaoLista = () => {
                     </Button>
                 </div>
 
-                {/* Summary Cards */}
+                {/* Cards de Resumo */}
                 <Row gutter={[16, 16]}>
                     <Col xs={24} sm={12} md={8}>
                         <Card bordered={false} className="card-lift">
@@ -91,6 +96,7 @@ const EstacaoLista = () => {
                 </Row>
             </div>
             
+            {/* Tabela de Dados */}
             <div style={{ background: '#fff', padding: '24px', borderRadius: '16px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-color)' }}>
                 <TabelaEstacoes
                     data={data}
@@ -100,6 +106,7 @@ const EstacaoLista = () => {
                 />
             </div>
 
+            {/* Modal do Mapa */}
             <ModalMapaEstacao
                 visible={modalMapaVisivel}
                 onClose={handleFecharMapa}

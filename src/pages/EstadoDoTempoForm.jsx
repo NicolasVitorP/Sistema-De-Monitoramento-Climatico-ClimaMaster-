@@ -8,12 +8,16 @@ import FormularioEstado from '../components/FormularioEstado';
 
 const { Title } = Typography;
 
+/**
+ * Página de formulário para cadastro e edição de Estados do Tempo.
+ */
 const EstadoDoTempoForm = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const dao = new EstadoDoTempoDAO();
     const [initialValues, setInitialValues] = useState(null);
 
+    // Carrega dados se for edição
     useEffect(() => {
         if (id) {
             const estado = dao.buscar(id);
@@ -35,6 +39,7 @@ const EstadoDoTempoForm = () => {
         }
     }, [id, navigate]);
 
+    // Salva ou atualiza o registro
     const onFinish = (values) => {
         try {
             const novoEstado = new EstadoDoTempo(

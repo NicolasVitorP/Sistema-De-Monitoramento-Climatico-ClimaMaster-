@@ -2,6 +2,16 @@ import React from 'react';
 import { Table, Button, Space, Modal, Tag, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
+/**
+ * Componente que exibe a tabela de Registros Climáticos.
+ * 
+ * @param {Object} props
+ * @param {Array} props.data Dados dos registros
+ * @param {Array} props.estacoes Dados de estações (para lookup de nome)
+ * @param {Array} props.estados Dados de estados (para lookup de condições)
+ * @param {Function} props.onEdit Função editar
+ * @param {Function} props.onDelete Função deletar
+ */
 const TabelaRegistros = ({ data, estacoes, estados, onEdit, onDelete }) => {
 
     const handleDelete = (id) => {
@@ -18,11 +28,17 @@ const TabelaRegistros = ({ data, estacoes, estados, onEdit, onDelete }) => {
         });
     };
 
+    /**
+     * Busca o nome da estação pelo ID.
+     */
     const getNomeEstacao = (id) => {
         const estacao = estacoes.find(e => e.id === id);
         return estacao ? estacao.nome : 'Desconhecida';
     };
 
+    /**
+     * Busca informações do estado para estilização da tag.
+     */
     const getEstadoInfo = (id) => {
         const estado = estados.find(e => e.id === id);
         if (!estado) return { nome: 'Desconhecido', color: 'default' };

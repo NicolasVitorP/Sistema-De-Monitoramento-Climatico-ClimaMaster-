@@ -1,11 +1,17 @@
 import RegistroClimatico from "../models/RegistroClimatico.mjs";
 
+/**
+ * Data Access Object (DAO) para Registros Climáticos.
+ * Gerencia o armazenamento de registros de leituras das estações.
+ */
 export default class RegistroClimaticoDAO {
     constructor() {
         this.chave = "registrosClimaticos";
     }
 
-    // Lista tudo do LocalStorage
+    /**
+     * Retorna todos os registros armazenados.
+     */
     listar() {
         try {
             const dados = localStorage.getItem(this.chave);
@@ -21,7 +27,7 @@ export default class RegistroClimaticoDAO {
         return Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
     }
 
-    // Converte o objeto da classe → JSON simples
+    // Converte de Classe para Objeto Simples
     toPlain(registro) {
         if (!registro) return {};
 
@@ -36,7 +42,9 @@ export default class RegistroClimaticoDAO {
         };
     }
 
-    // Salva um novo item
+    /**
+     * Adiciona um novo registro.
+     */
     salvar(registro) {
         const lista = this.listar();
         const obj = this.toPlain(registro);
@@ -48,7 +56,9 @@ export default class RegistroClimaticoDAO {
         return obj;
     }
 
-    // Atualiza por ID
+    /**
+     * Atualiza um registro existente.
+     */
     atualizar(id, novoRegistro) {
         const lista = this.listar();
         const obj = this.toPlain(novoRegistro);
@@ -66,13 +76,17 @@ export default class RegistroClimaticoDAO {
         localStorage.setItem(this.chave, JSON.stringify(lista));
     }
 
-    // Excluir por ID
+    /**
+     * Remove um registro.
+     */
     excluir(id) {
         const novaLista = this.listar().filter((e) => e.id !== id);
         localStorage.setItem(this.chave, JSON.stringify(novaLista));
     }
 
-    // Buscar por ID e reconstruir classe
+    /**
+     * Recupera um registro pelo ID e retorna como instância de classe.
+     */
     buscar(id) {
         const item = this.listar().find((e) => e.id === id);
         if (!item) return null;

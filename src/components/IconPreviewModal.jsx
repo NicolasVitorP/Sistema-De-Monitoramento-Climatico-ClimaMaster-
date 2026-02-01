@@ -1,6 +1,14 @@
 import React from 'react';
 import { Modal, Image } from 'antd';
 
+/**
+ * Componente Modal para visualizar a imagem do ícone.
+ * 
+ * @param {Object} props
+ * @param {string} props.url URL da imagem a ser exibida.
+ * @param {boolean} props.open Controla a visibilidade do modal.
+ * @param {Function} props.onClose Função para fechar o modal.
+ */
 const IconPreviewModal = ({ url, open, onClose }) => {
     return (
         <Modal

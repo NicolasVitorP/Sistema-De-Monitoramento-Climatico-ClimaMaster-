@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * Componente simples para exibir um ícone com fundo colorido.
+ * 
+ * @param {Object} props
+ * @param {ReactNode} props.icon Ícone a ser exibido
+ * @param {string} props.color Cor base para o ícone e fundo
+ */
 const StatIcon = ({ icon, color }) => (
     <div style={{
         width: '48px',

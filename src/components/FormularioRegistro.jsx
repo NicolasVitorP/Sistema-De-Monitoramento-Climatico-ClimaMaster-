@@ -5,9 +5,19 @@ import dayjs from 'dayjs';
 
 const { Option } = Select;
 
+/**
+ * Componente de formulário para criar ou editar um Registro Climático.
+ * 
+ * @param {Object} props
+ * @param {Function} props.onFinish Callback de submissão
+ * @param {Object} props.initialValues Valores iniciais para edição
+ * @param {Array} props.estacoes Lista de estações disponíveis
+ * @param {Array} props.estados Lista de estados do tempo disponíveis
+ */
 const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
     const [form] = Form.useForm();
 
+    // Inicializa o formulário e converte a data para objeto Dayjs
     useEffect(() => {
         if (initialValues) {
             form.setFieldsValue({
@@ -29,6 +39,7 @@ const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
         >
             <Row gutter={24}>
                 <Col xs={24} sm={12}>
+                    {/* Seleção de Estação */}
                     <Form.Item
                         label="Estação de Medição"
                         name="estacaoId"
@@ -42,6 +53,7 @@ const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
+                    {/* Seleção de Condição */}
                     <Form.Item
                         label="Condição do Tempo"
                         name="estadoTempoId"
@@ -56,6 +68,7 @@ const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
                 </Col>
             </Row>
 
+            {/* Data e Hora */}
             <Form.Item
                 label="Data e Hora"
                 name="dataHora"
@@ -66,6 +79,7 @@ const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
 
             <Row gutter={24}>
                 <Col xs={24} sm={8}>
+                    {/* Temperatura */}
                     <Form.Item
                         label="Temperatura"
                         name="temperatura"
@@ -78,6 +92,7 @@ const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={8}>
+                    {/* Umidade */}
                     <Form.Item
                         label="Umidade"
                         name="umidade"
@@ -92,6 +107,7 @@ const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={8}>
+                    {/* Pressão */}
                     <Form.Item
                         label="Pressão"
                         name="pressaoAtmosferica"
@@ -106,6 +122,7 @@ const FormularioRegistro = ({ onFinish, initialValues, estacoes, estados }) => {
                 </Col>
             </Row>
 
+            {/* Botão Salvar */}
             <Form.Item style={{ marginTop: '16px' }}>
                 <Button 
                     type="primary" 
