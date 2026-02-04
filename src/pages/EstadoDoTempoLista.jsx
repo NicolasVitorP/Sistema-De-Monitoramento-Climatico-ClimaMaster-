@@ -9,9 +9,6 @@ import StatIcon from '../components/StatIcon';
 
 const { Title, Text } = Typography;
 
-/**
- * Página de listagem dos Estados do Tempo.
- */
 const EstadoDoTempoLista = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
@@ -34,7 +31,7 @@ const EstadoDoTempoLista = () => {
 
     return (
         <div className="fade-in" style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto' }}>
-             {/* Cabeçalho e Estatísticas */}
+             {/* Header & Stats */}
             <div style={{ marginBottom: '32px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
                     <div>
@@ -70,7 +67,6 @@ const EstadoDoTempoLista = () => {
                 </Row>
             </div>
             
-            {/* Tabela de Dados */}
             <div style={{ background: '#fff', padding: '24px', borderRadius: '16px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-color)' }}>
                 <TabelaEstados
                     data={data}

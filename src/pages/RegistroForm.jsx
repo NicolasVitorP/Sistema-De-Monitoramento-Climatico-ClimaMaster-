@@ -10,9 +10,6 @@ import FormularioRegistro from '../components/FormularioRegistro';
 
 const { Title } = Typography;
 
-/**
- * Página de formulário para cadastro e edição de Registros Climáticos.
- */
 const RegistroForm = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -24,7 +21,6 @@ const RegistroForm = () => {
     const [estacoes, setEstacoes] = useState([]);
     const [estados, setEstados] = useState([]);
 
-    // Carrega dados iniciais (estações, estados e registro se for edição)
     useEffect(() => {
         setEstacoes(estacaoDao.listar());
         setEstados(estadoDao.listar());
@@ -49,7 +45,6 @@ const RegistroForm = () => {
         }
     }, [id, navigate]);
 
-    // Salva ou atualiza o registro
     const onFinish = (values) => {
         try {
             const novoRegistro = new RegistroClimatico(

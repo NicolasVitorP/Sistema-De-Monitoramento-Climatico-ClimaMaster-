@@ -1,19 +1,10 @@
 import React from 'react';
 
-/**
- * Componente de Logo da Aplicação.
- * Exibe o ícone e o nome "ClimaMaster".
- * 
- * @param {Object} props
- * @param {number} props.width Largura do logo (default: 180)
- * @param {boolean} props.showText Se deve exibir o texto (default: true)
- * @param {boolean} props.condensed Se deve exibir a versão condensada (default: false)
- */
 const Logo = ({ width = 180, showText = true, condensed = false }) => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', height: '100%' }}>
       {/* Dynamic SVG Icon - Sun & Cloud */}
-      {/* Usando o ícone personalizado do usuário em 3D */}
+      {/* User's Custom 3D Weather Icon (No Background) */}
       <img
         src="/logo-climamaster-clean.png"
         alt="Weather Icon"
@@ -25,7 +16,7 @@ const Logo = ({ width = 180, showText = true, condensed = false }) => {
         }}
       />
 
-      {/* Marca Texto */}
+      {/* Text Branding */}
       {showText && !condensed && (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <span style={{ 

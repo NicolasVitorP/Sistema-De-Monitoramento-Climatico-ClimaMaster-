@@ -16,16 +16,11 @@ import StatIcon from '../components/StatIcon';
 const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
 
-/**
- * Página de Relatório Combinado.
- * Exibe médias calculadas e estatísticas gerais por estação e período.
- */
 const RelatorioCombinado = () => {
     const [dados, setDados] = useState([]);
     const [loading, setLoading] = useState(true);
     const [datas, setDatas] = useState(null);
 
-    // Carrega dados do RelatorioService
     const carregarDados = () => {
         setLoading(true);
         const service = new RelatorioService();
@@ -46,7 +41,7 @@ const RelatorioCombinado = () => {
         carregarDados();
     }, [datas]);
 
-    // Calcular Estatísticas Resumidas (Total, Médias Gerais)
+    // Calculate Summary Stats
     const stats = useMemo(() => {
         if (!dados.length) return { totalEstacoes: 0, avgTemp: 0, avgUmid: 0 };
         const totalEstacoes = dados.length;

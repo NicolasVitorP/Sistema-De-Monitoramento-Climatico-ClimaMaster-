@@ -3,25 +3,15 @@ import { Table, Button, Space, Modal, Tooltip, Tag } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import IconPreviewModal from './IconPreviewModal';
 
-/**
- * Componente que exibe a tabela de Estados do Tempo.
- * 
- * @param {Object} props
- * @param {Array} props.data Dados dos estados
- * @param {Function} props.onEdit Função de editar
- * @param {Function} props.onDelete Função de deletar
- */
 const TabelaEstados = ({ data, onEdit, onDelete }) => {
     const [previewUrl, setPreviewUrl] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
 
-    // Abre o modal de visualização do ícone
     const handlePreview = (url) => {
         setPreviewUrl(url);
         setModalOpen(true);
     };
 
-    // Confirmação de exclusão
     const handleDelete = (id) => {
         Modal.confirm({
             title: 'Excluir Estado do Tempo?',

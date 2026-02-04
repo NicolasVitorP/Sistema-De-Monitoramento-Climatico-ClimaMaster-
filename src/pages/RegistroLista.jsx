@@ -11,9 +11,6 @@ import StatIcon from '../components/StatIcon';
 
 const { Title, Text } = Typography;
 
-/**
- * Página de listagem dos Registros Climáticos.
- */
 const RegistroLista = () => {
     const [data, setData] = useState([]);
     const [estacoes, setEstacoes] = useState([]);
@@ -24,7 +21,6 @@ const RegistroLista = () => {
     const estacaoDao = new EstacaoMedicaoDAO();
     const estadoDao = new EstadoDoTempoDAO();
 
-    // Carrega dados de todas as entidades necessárias
     const carregarDados = () => {
         const lista = dao.listar();
         setData(lista);
@@ -55,7 +51,7 @@ const RegistroLista = () => {
                 </Button>
             </div>
 
-             {/* Header e Estatísticas */}
+             {/* Header & Stats */}
             <div style={{ marginBottom: '32px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
                      <div>

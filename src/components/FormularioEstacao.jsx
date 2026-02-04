@@ -2,17 +2,9 @@ import React, { useEffect } from 'react';
 import { Form, Input, InputNumber, Button, Row, Col } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 
-/**
- * Componente de formulário para criar ou editar uma Estação de Medição.
- * 
- * @param {Object} props
- * @param {Function} props.onFinish Função callback chamada ao submeter o formulário com sucesso.
- * @param {Object} props.initialValues Valores iniciais para preencher o formulário (em caso de edição).
- */
 const FormularioEstacao = ({ onFinish, initialValues }) => {
     const [form] = Form.useForm();
 
-    // Efeito para atualizar os valores do formulário quando initialValues muda
     useEffect(() => {
         if (initialValues) {
             form.setFieldsValue(initialValues);
@@ -29,7 +21,6 @@ const FormularioEstacao = ({ onFinish, initialValues }) => {
             autoComplete="off"
             size="large"
         >
-            {/* Campo Nome */}
             <Form.Item
                 label="Nome da Estação"
                 name="nome"
@@ -40,7 +31,6 @@ const FormularioEstacao = ({ onFinish, initialValues }) => {
 
             <Row gutter={24}>
                 <Col xs={24} sm={12}>
-                    {/* Campo Latitude */}
                     <Form.Item
                         label="Latitude"
                         name="latitude"
@@ -50,7 +40,6 @@ const FormularioEstacao = ({ onFinish, initialValues }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                    {/* Campo Longitude */}
                     <Form.Item
                         label="Longitude"
                         name="longitude"
@@ -63,7 +52,6 @@ const FormularioEstacao = ({ onFinish, initialValues }) => {
 
             <Row gutter={24}>
                 <Col xs={24} sm={12}>
-                    {/* Campo Cidade */}
                     <Form.Item
                         label="Cidade"
                         name="cidade"
@@ -73,7 +61,6 @@ const FormularioEstacao = ({ onFinish, initialValues }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                    {/* Campo País */}
                     <Form.Item
                         label="País"
                         name="pais"
@@ -84,7 +71,6 @@ const FormularioEstacao = ({ onFinish, initialValues }) => {
                 </Col>
             </Row>
 
-            {/* Botão de Salvar */}
             <Form.Item style={{ marginTop: '16px' }}>
                 <Button 
                     type="primary" 

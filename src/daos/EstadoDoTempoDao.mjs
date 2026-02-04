@@ -1,18 +1,11 @@
 import EstadoDoTempo from "../models/EstadoDoTempo.mjs";
 
-/**
- * Data Access Object (DAO) para Estados do Tempo.
- * Gerencia a persistência de dados no LocalStorage.
- */
 export default class EstadoDoTempoDAO {
   constructor() {
-    this.chave = "estadosDoTempo"; // Chave de armazenamento
+    this.chave = "estadosDoTempo";
   }
 
-  /**
-   * Lista todos os estados do tempo salvos.
-   * @returns {Array} Lista de objetos
-   */
+  // Lista tudo do LocalStorage
   listar() {
     try {
       const dados = localStorage.getItem(this.chave);
@@ -23,17 +16,12 @@ export default class EstadoDoTempoDAO {
     }
   }
 
-  /**
-   * Gera um ID único string.
-   * @returns {string} ID gerado.
-   */
+  // Gera ID único
   gerarId() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
   }
 
-  /**
-   * Transforma a instância de classe em objeto JS puro.
-   */
+  // Converte o objeto da classe → JSON simples
   toPlain(estado) {
     if (!estado) return {};
 
@@ -48,9 +36,7 @@ export default class EstadoDoTempoDAO {
     };
   }
 
-  /**
-   * Salva um novo estado do tempo.
-   */
+  // Salva um novo item
   salvar(estado) {
     const lista = this.listar();
     const obj = this.toPlain(estado);
@@ -62,9 +48,7 @@ export default class EstadoDoTempoDAO {
     return obj;
   }
 
-  /**
-   * Atualiza um estado existente.
-   */
+  // Atualiza por ID
   atualizar(id, novoEstado) {
     const lista = this.listar();
     const obj = this.toPlain(novoEstado);
@@ -82,17 +66,13 @@ export default class EstadoDoTempoDAO {
     localStorage.setItem(this.chave, JSON.stringify(lista));
   }
 
-  /**
-   * Remove um estado pelo ID.
-   */
+  // Excluir por ID
   excluir(id) {
     const novaLista = this.listar().filter((e) => e.id !== id);
     localStorage.setItem(this.chave, JSON.stringify(novaLista));
   }
 
-  /**
-   * Busca por ID e retorna uma instância da classe.
-   */
+  // Buscar por ID e reconstruir classe
   buscar(id) {
     const item = this.listar().find((e) => e.id === id);
     if (!item) return null;
@@ -106,7 +86,7 @@ export default class EstadoDoTempoDAO {
       item.iconeURL
     );
 
-    estado.id = item.id; // restaurar ID
+    estado.id = item.id; // adicionar ID no objeto
     return estado;
   }
 }

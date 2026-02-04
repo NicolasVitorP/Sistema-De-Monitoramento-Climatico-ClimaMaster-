@@ -34,32 +34,23 @@ const customIcon = L.divIcon({
     popupAnchor: [0, -36],
 });
 
-// Componente auxiliar para lidar com a invalidação e centralização do mapa
+// Component to handle map invalidation and centering
 const MapController = ({ center }) => {
     const map = useMap();
     
     useEffect(() => {
         const timer = setTimeout(() => {
-            map.invalidateSize(); // Corrige problemas de renderização ao abrir em modal
+            map.invalidateSize();
             if (center) {
-                map.setView(center, 13, { animate: false }); // Centralização instantânea
+                map.setView(center, 13, { animate: false }); // Instant set, no flyTo delay
             }
-        }, 100); 
+        }, 100); // Super fast init
         return () => clearTimeout(timer);
     }, [map, center]);
 
     return null;
 };
 
-/**
- * Componente Modal para exibir a localização de uma estação no mapa.
- * 
- * @param {Object} props
- * @param {boolean} props.visible Se o modal está visível
- * @param {Function} props.onClose Função para fechar o modal
- * @param {Object} props.estacao Dados da estação a ser exibida
- * @param {Function} props.onEdit Função de callback para editar a estação
- */
 const ModalMapaEstacao = ({ visible, onClose, estacao, onEdit }) => {
     if (!estacao) return null;
 
@@ -67,7 +58,6 @@ const ModalMapaEstacao = ({ visible, onClose, estacao, onEdit }) => {
     const lon = parseFloat(estacao.longitude);
     const isValid = !isNaN(lat) && !isNaN(lon);
     
-    // Chave única para forçar a remontagem do mapa quando a estação ou visibilidade mudam
     const mapKey = `map-${estacao.id}-${visible}`;
 
     return (
@@ -98,20 +88,21 @@ const ModalMapaEstacao = ({ visible, onClose, estacao, onEdit }) => {
                         key={mapKey}
                         center={[lat, lon]}
                         zoom={13}
-                        // Fundo claro para combinar com o mapa e evitar "flash" durante carregamento
+                        // Changed background to #f8f8f8 to match the CartoDB Light tiles (land color)
+                        // This makes the "loading" delay much less noticeable than the blue water color
                         style={{ height: '100%', width: '100%', background: '#f8f8f8' }}
                         zoomControl={false}
                         attributionControl={false}
                     >
-                        {/* Camada do Mapa (CartoDB Positron) */}
+                        {/* CartoDB Positron */}
                         <TileLayer
                             attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
                             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                            // Otimizações de renderização
-                            keepBuffer={6} 
-                            updateWhenZooming={true}
-                            updateWhenIdle={false} 
-                            minZoom={4} 
+                            // Critical optimizations for smoother zooming:
+                            keepBuffer={6} // Keep a healthy buffer but not excessive
+                            updateWhenZooming={true} // Update tiles DURING zoom causing less "blank" time
+                            updateWhenIdle={false} // Don't wait for idle to update
+                            minZoom={4} // Prevent zooming out to world view where loading is heaviest
                         />
                         <Marker position={[lat, lon]} icon={customIcon}>
                             <Popup closeButton={false} className="custom-popup">

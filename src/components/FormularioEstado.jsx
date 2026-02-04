@@ -2,17 +2,9 @@ import React, { useEffect } from 'react';
 import { Form, Input, InputNumber, Button, Row, Col } from 'antd';
 import { SaveOutlined, CloudOutlined } from '@ant-design/icons';
 
-/**
- * Componente de formulário para criar ou editar um Estado do Tempo.
- * 
- * @param {Object} props
- * @param {Function} props.onFinish - Callback de submissão.
- * @param {Object} props.initialValues - Valores para edição (opcional).
- */
 const FormularioEstado = ({ onFinish, initialValues }) => {
     const [form] = Form.useForm();
 
-    // Popula o formulário se houver valores iniciais (modo edição)
     useEffect(() => {
         if (initialValues) {
             form.setFieldsValue(initialValues);
@@ -29,7 +21,6 @@ const FormularioEstado = ({ onFinish, initialValues }) => {
             autoComplete="off"
             size="large"
         >
-            {/* Condição Geral */}
             <Form.Item
                 label="Condição Geral"
                 name="condicaoGeral"
@@ -40,7 +31,6 @@ const FormularioEstado = ({ onFinish, initialValues }) => {
 
             <Row gutter={24}>
                 <Col xs={24} sm={12}>
-                    {/* Temperatura */}
                     <Form.Item
                         label="Temperatura"
                         name="temperatura"
@@ -54,7 +44,6 @@ const FormularioEstado = ({ onFinish, initialValues }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                    {/* Umidade */}
                     <Form.Item
                         label="Umidade"
                         name="umidade"
@@ -73,7 +62,6 @@ const FormularioEstado = ({ onFinish, initialValues }) => {
 
             <Row gutter={24}>
                 <Col xs={24} sm={12}>
-                    {/* Precipitação */}
                     <Form.Item
                         label="Precipitação"
                         name="precipitacaoMM"
@@ -88,7 +76,6 @@ const FormularioEstado = ({ onFinish, initialValues }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                    {/* Vento */}
                     <Form.Item
                         label="Velocidade do Vento"
                         name="velocidadeVento"
@@ -104,7 +91,6 @@ const FormularioEstado = ({ onFinish, initialValues }) => {
                 </Col>
             </Row>
 
-            {/* URL do ícone */}
             <Form.Item
                 label="URL do Ícone"
                 name="iconeURL"
@@ -113,7 +99,6 @@ const FormularioEstado = ({ onFinish, initialValues }) => {
                 <Input placeholder="http://exemplo.com/icone.png" style={{ borderRadius: '12px' }} />
             </Form.Item>
 
-            {/* Botão Salvar */}
             <Form.Item style={{ marginTop: '16px' }}>
                 <Button 
                     type="primary" 
