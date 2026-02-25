@@ -1,4 +1,5 @@
----
+<p align="center"><img src="https://github.com/user-attachments/assets/4f791b28-7538-45a8-a2b1-1446eb646050" width="180" alt="ClimaMaster Logo" />
+
 # <p align="center"> Sistema de Monitoramento Climático ClimaMaster </p>
 
 
