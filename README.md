@@ -2,7 +2,7 @@
 <div align="center">
  <a href="https://sistema-de-monitoramento-climatico.vercel.app/" target="_blank">
 
-  <img width="530" height="530" alt="ClimaMaster" src="https://github.com/user-attachments/assets/0b397957-8edd-4406-9b5b-8846616aaf45" />
+  <img width="370" height="370" alt="ClimaMaster" src="https://github.com/user-attachments/assets/0b397957-8edd-4406-9b5b-8846616aaf45" />
 </div>
 
 
